@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reconocimiento Facial Emocional</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 30px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .camera-feed {
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .emotion-panel {
+            text-align: center;
+        }
+
+        .emotion-panel img {
+            width: 200px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            border: 3px solid #fff;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .buttons form {
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .buttons button {
+            background-color: #0072ff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reconocimiento de Emociones</h1>
+    <div class="container">
+        <div>
+            <img class="camera-feed" src="{{ url_for('video_feed') }}" width="720" height="560">
+        </div>
+        <div class="emotion-panel">
+            <h2>Imita esta emoción:</h2>
+            <img src="{{ url_for('static', filename='emociones/' + emocion_actual + '.png') }}">
+            <p style="font-size: 1.5rem; text-transform: uppercase;">{{ emocion_actual }}</p>
+            <div class="buttons">
+                <form method="POST" action="/set_emotion">
+                    <button name="emotion" value="happy">Felicidad</button>
+                </form>
+                <form method="POST" action="/set_emotion">
+                    <button name="emotion" value="sad">Tristeza</button>
+                </form>
+                <form method="POST" action="/set_emotion">
+                    <button name="emotion" value="surprise">Sorpresa</button>
+                </form>
+                <form method="POST" action="/set_emotion">
+                    <button name="emotion" value="angry">Enojo</button>
+                </form>
+                <form method="POST" action="/set_emotion">
+                    <button name="emotion" value="neutral">Neutral</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    
